@@ -7,7 +7,7 @@ import numpy as np
 import torch
 import cv2
 
-from dataset.dexycb_project import DexYCB_Project
+from dataset.dexycb import DexYCB
 
 
 # ============================================================
