@@ -1,3 +1,4 @@
+import argparse
 import matplotlib
 matplotlib.use("Agg")
 
@@ -10,10 +11,19 @@ from dataset.dexycb_project import DexYCB_Project
 
 
 # ============================================================
-# SETTINGS
+# SETTINGS & ARGUMENT PARSER
 # ============================================================
 
-DATASET_ROOT = "/data/datasets/DexYCB"
+parser = argparse.ArgumentParser(description="DexYCB Dataset Inspection")
+parser.add_argument(
+    "--dataset_root", 
+    type=str, 
+    default="/data/datasets/DexYCB", 
+    help="Path to the DexYCB dataset directory"
+)
+args = parser.parse_args()
+
+DATASET_ROOT = args.dataset_root
 
 frame = 100
 
@@ -94,4 +104,3 @@ print("  max    :", depth.max(), "mm")
 
 if len(valid_depth) > 0:
     print("  median :", np.median(valid_depth), "mm")
-
