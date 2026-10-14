@@ -31,7 +31,7 @@ frame = 100
 # DATASET
 # ============================================================
 
-dataset = DexYCB_Project(
+dataset = DexYCB(
     root=DATASET_ROOT
 )
 
