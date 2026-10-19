@@ -13,6 +13,7 @@ For this project you will need the files:  20200709-subject-01.tar.gz,  bop.tar.
 Make sure that you have the folders in the correct structure. You can download the zip file from the following link: https://drive.google.com/file/d/1ECo1wFpMtkEtX8i3sFt3FJfr2K6-beuM/view?usp=sharing
 
 # Data Inspection 🔎
+To inspect the dataset by printing and plotting some data.
 ```
 python dataset_inspection.py --dataset_root "/content/DexYCB" --index 100
 ```
