@@ -21,11 +21,16 @@ parser.add_argument(
     default="/data/datasets/DexYCB", 
     help="Path to the DexYCB dataset directory"
 )
+parser.add_argument(
+    "--index",
+    type=int,
+    default=100,
+    help="Index of the dataset sample to inspect and plot"
+)
 args = parser.parse_args()
 
 DATASET_ROOT = args.dataset_root
-
-frame = 100
+frame = args.index
 
 # ============================================================
 # DATASET
@@ -96,7 +101,6 @@ else:
     depth_vmax = 1
 
 
-
 print("\nDepth shape:", depth.shape)
 print("  dtype  :", depth.dtype)
 print("  min    :", depth.min(), "mm")
@@ -104,3 +108,31 @@ print("  max    :", depth.max(), "mm")
 
 if len(valid_depth) > 0:
     print("  median :", np.median(valid_depth), "mm")
+
+
+# ============================================================
+# PLOTTING
+# ============================================================
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+# Plot RGB Image
+axes[0].imshow(rgb)
+axes[0].set_title(f"RGB (Index {frame})")
+axes[0].axis("off")
+
+# Plot Depth Map with Colorbar
+im = axes[1].imshow(depth, cmap="viridis", vmin=depth_vmin, vmax=depth_vmax)
+axes[1].set_title(f"Depth Map (Index {frame})")
+axes[1].axis("off")
+
+# Add colorbar for depth visualization
+cbar = fig.colorbar(im, ax=axes[1], fraction=0.046, pad=0.04)
+cbar.set_label("Depth (mm)")
+
+plt.tight_layout()
+output_filename = "dexycb_sample.png"
+plt.savefig(output_filename, bbox_inches="tight", dpi=150)
+plt.close()
+
+print(f"\nSaved visualization plot to: {output_filename}")
